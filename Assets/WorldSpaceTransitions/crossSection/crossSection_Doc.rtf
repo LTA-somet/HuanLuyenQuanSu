@@ -1,0 +1,184 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deftab708{\fonttbl{\f0\fswiss\fprq2\fcharset238 Arial;}{\f1\fswiss\fprq2\fcharset0 Arial;}{\f2\fswiss\fprq2\fcharset0 Helvetica;}{\f3\fswiss\fcharset238 Arial;}{\f4\fnil\fcharset238 Arial;}{\f5\fnil\fcharset0 Arial;}{\f6\fswiss\fcharset0 Arial;}}
+{\colortbl ;\red255\green66\blue14;\red0\green0\blue0;\red163\green21\blue21;\red197\green0\blue11;\red87\green157\blue28;\red192\green80\blue77;\red0\green255\blue255;\red209\green99\blue73;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\nowidctlpar\qc\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\b\f0\fs30\lang1033 crossSection Documentation\b0\fs24\lang1045\par
+\par
+
+\pard\nowidctlpar\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\b\f1\lang1033 1. Introduction\b0\f0\lang1045\par
+\f1\lang1033 The package serves to make crosssections across the GameObjects build from meshes organized in a hierarchy.\f0\lang1045\par
+
+\pard\nowidctlpar\qc\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\par
+
+\pard\nowidctlpar\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\b\f1\lang1033 2. The package content\b0\f0\lang1045\par
+\f1\lang1033 The package is based on a number of C# scripts and set of special crosssection shaders. The package contains eleven demonstration scenes.\f0\lang1045\par
+\par
+\f1\lang1033 The crosssection shaders currently include the clipping versions of the following builtin  Unity shaders:\f0\lang1045\par
+\f1\lang1033 - Legacy/Bumped Diffuse\f0\lang1045\par
+\f1\lang1033 - Legacy/Bumped Specular\line - Legacy/Diffuse\line - Legacy/Decal\line - Legacy/Reflective/Diffuse\line - Legacy/Reflective/Specular\line - Legacy/Reflective/VertexLit\line - Legacy/Transparent/Diffuse\line - Legacy/Transparent/Specular\line - Legacy/Transparent/Bumped Specular\line - Legacy/Transparent/Cutout/Bumped Specular\line - Legacy/Lightmapped/Diffuse\line - Legacy/Lightmapped/Bumped Diffuse\f0\lang1045\par
+\f1\lang1033 - Unlit/Texture\line - Unlit/Color\line - Standard\line - Standard (Specular setup)\f0\lang1045\par
+\f1\lang1033 - Autodesk Interactive\line - Standard Surface Shader\line - GUI/Text Shader\line - all the TextMeshPro shaders (packed inside the zip file \endash  require Text Mesh Pro Asset)\f0\lang1045\par
+\par
+\b\f2\lang1033\line\b0\f0 These crossection shaders are named after them by adding the \ldblquote C\i rossSection/\rdblquote  \i0 prefix at\i  \i0 the beginning of the name.\i  \i0\lang1045\par
+\par
+\b\f1\lang1033 The example scenes:\line\b0\f0\lang1045\par
+\b\f1\lang1033 - Single plane \b0 demo\b  \b0 scene contains the TestGameObject with the \i SectionSetup\i0  component attached. The TestGameObject renderers can use any materials using any shaders. The \i SectionSetup.model \i0 variable is bound to TestGameObject so the component can check these shaders. In case of crossection shaders,  the component leaves the material as it is, otherwise it tries to find a shader substitute among these listed above shaders. Then it generates a material duplicate with properties inherited from original. If it can not find the exact matching shaders it puts the CrossSection/Legacy/Diffuse shader by default. Note that in that case\cf1  the visual appearance of the material will probably change\cf0 . To get the best control over the object appearance use the crossSection shaders from the asset. \line The \i SinglePlaneSection \i0 script sets the cross section shaders keywords on/off on entering and on leaving the play mode.\i  \i0 The cross-section plane follows the position and orientation of the Gizmo object which is also included in the scene. Generally the cross-section plane can  follow any moving GameObject with the \i GizmoFollow \i0 script attached.  The \i GizmoFollow \i0 script updates the cross section shaders global variables, following the orientation of \i GizmoFollow \i0 transform, during the play mode.\f0\lang1045\par
+\f1\lang1033\line - \b Planar xyz setup \b0 contains a GUI to setup and move the cross-section plane along the coordinate system's xyz axis, in a way constrained within the GameObject's bounds. These bounds are calculated within the SectionSetup script in editor on model variable assignment. If you move, rotate or change the model hierarchy content, please reassign this variable to get these bounds recalculated.\line\line - \b Various materials \b0 is just the same as above, but using a bigger number of materials, representing shaders covered by the asset\line\line - I\b ntersecing geometry \b0 is just a single plane cross section with a special support for intersecting geometry.\f0\lang1045\par
+\f1\lang1033\line\cf2\b - Material transition \b0 -  the setup is the same as in single plane scene. The submesh count on the mesh renderers on the test GameObject equals to one, but the materials are two. In cases like that both materials get rendered. The \i inverse\i0  material variable lets us inverse the the clipping plane on one of these materials.\cf0\f0\lang1045\par
+\f1\lang1033\line - \b Pie section\b0  - this is the a two angled planes section.\line\line - \b Sphere section\b0  a point clicked on the demonstration GameObject defines the position of centre of the clipping sphere. Then you can drag on the demonstration GameObject to set the clipping sphere radius.\b\line\line\b0 - \b Cube section\b0  - a point clicked on the demonstration sphere defines the position of centre of the clipping cube. Then you can drag on the demonstration sphere to set the clipping cube size. The cube orientation is set by normal in the clicked point and by transform.up of the demonstration sphere.\b\line\line\b0 - \b Multi tube section\b0  - a point clicked on the demonstration GameObject defines the position of centre of the clipping cylinder. The cylinder height is infinite; i.e. the cylinder has no caps. The cylinder axis is determined by normal in the clicked point. Then you can drag on the demonstration GameObject to set the cylinder radius. The example allows up to 5 clipping cylinders.\line\f0\lang1045\par
+\f1\lang1033 The crosssection shaders just render until they meet the section plane and leave the rest of the gameobject not rendered.\f0\lang1045\par
+\par
+\f1\lang1033 The crossSection materials in the above scenes can be manipulated using material and shader global keywords and variables.\f0\lang1045\par
+\f1\lang1033 The keyword names are self-explanatory:\f0\lang1045\par
+\cf3\f1\lang1033 -"CLIP_PLANE"\line -"CLIP_TWO_PLANES"\cf0\f0\lang1045\par
+\cf3\f1\lang1033 -"CLIP_SPHERE"\cf0\f0\lang1045\par
+\cf4\f1\lang1033 -"CLIP_CUBE"\cf0\f0\lang1045\par
+\cf4\f1\lang1033 -"CLIP_TUBES"\cf0\f0\lang1045\par
+\cf2\f1\lang1033 The variables are:\cf0\f0\lang1045\par
+\cf3\f1\lang1033 "_SectionPoint" - \cf2 point\cf3  \cf2 which has to be included in the section plane (or both if there are two planes) or centre of radius in case of sphere section\cf0\f0\lang1045\par
+
+\pard\nowidctlpar\cf3\f1\lang1033 "_SectionPlane"\cf2  - normal of the section plane\cf0\f0\lang1045\par
+\cf3\f1\lang1033 "_SectionPlane2" - \cf2 normal of the second section plane\cf0\f0\lang1045\par
+\cf3\f1\lang1033 "_Radius"  \cf2 radius\cf3  \cf2 in case of sphere section.\cf0\f0\lang1045\par
+\par
+\cf2\f1\lang1033 Tube sections (multiple) use it's own set of array variables. The hardcoded number of tube sections is 64. The corresponding variables are VectorArray: \cf4\i _AxisDirs\cf3\i0  - \cf2 for the tube axes\cf3 , _\i centerPoints\i0  - \cf2 for the cylinder centres and \cf4\i _Radiuses\i0  - \cf2 for the cylinder radiuses. The integer \cf4\i _centerCount\cf2\i0  variable is to control the actual number of active cylindres for the shader code to loop.\cf0\f0\lang1045\par
+\cf2\f1\lang1033 The \cf4\i _SectionColor\cf5\i0  \cf2 variable is a local level shader variable to control the color of the backfaces individually on the material level. I have also used the alpha value of that to control the visibility of backfaces on some od the shaders depending on if a>0.5, (CrossSection/Standard, Standard Specular Setup) - because someone has requested the backfaces on/off functionality.\cf0\f0\lang1045\par
+\par
+\cf2\f1\lang1033 The basic CrossSection scenario consist of a single effect with single plane or sphere imposed on a number of materials with use of shader global variables. It is also possible to expose the variables on the shaders and assign them on the material level or to override the global variables in scripts so we could have a number of section planes, circles or boxes in a single scene. An example of this is the \i single_plane_individual\i0  scene.\cf0\f0\lang1045\par
+\cf2\f1\lang1033 You can slighty edit the shader code to change the property scope from global to local. In case of most properties \endash  excluding arrays (like FloatArray or VectorArray) it is just a mater or putting the property into the shader properties block. Most of the cross-section shader HSLS files inside the asset already contain the relevant property lines commented and it is just a matter of uncommenting them.\line In case of shader graphs it is a matter of editing the graph blackboard, marking the properties as exposed.\cf0\f0\lang1045\par
+\cf2\f1\lang1033  \cf0\f0\lang1045\par
+\par
+
+\pard\nowidctlpar\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\cf2\b\f1\lang1033 Capped setup example scenes:\line\cf0\b0\f0\lang1045\par
+\cf2\f1\lang1033 The capped setups are the right choice when you like to use shading on the clipped surface or to apply some hatching texture to it. Or when using multiple clipping planes when their normals form an obtuse angle \endash  to prevent seeing holes on clipped backfaces. Then the main shader writes the backfaces as well as clipped backfaces areas to the stenclil buffer so they could later be rendered by shaders used on the clipping planes.\cf0\f0\lang1045\par
+\cf2\b\f1\lang1033\line\b0 - \b Box section \b0  the test GameObject can use any of the following shaders:\line   - Clipping/Box/SurfaceShader (a remake of SurfaceShader)\line   - Clipping/Box/Standard (a remake of Standard shader)\line   - Clipping/BoxS/tandard Specular setup (a remake of Standard Specular setup shader)\line Drag the semitransparent planes of CrossSectionBox object to adjust the box section.\cf0\f0\lang1045\par
+\par
+\cf2\f1\lang1033 - \b Box section advanced\b0  the same as box section, but each model gameObject material has assigned a specific material for clipping planes. GameObject materials have separate stencil masks. A Gameobject material and the corresponding clipping plane material share the same stencil mask value and could also share the same diffuse texture. T\f3\lang1045 he six CrossSectionBox quad elements represent clipping planes of the box: \line X_hatch, Xneg_hatch, Y_hatch, Yneg_hatch, Z_hatch, Zneg_hatch \line and have assigned not a single material, but an array of clipping plane materials.\cf0\f0\par
+\cf2\f1\lang1033\line\line - \b Corner section \b0  the test GameObject can use any of the following shaders:\line   - Clipping/Corner/ SurfaceShader (a remake of SurfaceShader)\line   - Clipping/Corner/Standard (a remake of Standard shader)\line   - Clipping/Corner/Standard Specular setup (a remake of Standard Specular setup shader)\cf0\f0\lang1045\par
+\cf2\f1\lang1033 Drag the semitransparent planes of CrossSectionCorner object to adjust the corner section.\cf0\f0\lang1045\par
+\par
+\cf2\f1\lang1033 - \b Corner section advanced\b0  the same as corner section, but each model gameObject material has assigned a specific material for clipping planes. GameObject materials have separate stencil masks. A Gameobject material and the corresponding section plane material share the same stencil mask value and could also share the same diffuse texture. T\f3\lang1045 he three CrossSectionCorner quad elements, which represent three corner clipping planes: X_hatch, Y_hatch, Z_hatch have assigned not a single material, but an array of clipping plane materials with separate stencil masks.\cf0\f0\par
+\par
+\cf2\b\f3\lang1033 - Single plane capped \b0 demonstrates the cross-section surface covered with a hatched quad. T\f0 he TestGameObject materials use stencil buffers and write specific masks to it. Then these masks are revealed by corresponding materials assigned to the quad. The \i SectionPlaneCapped\i0  script is attached to the quad. On assigning the \i toBeSectioned  \i0 variable in editor\i  - \i0 the quad gets sized to fit. It also adjusts itself to the position and rotation of Gizmo GameObject.\cf0\lang1045\par
+\par
+\b\f1\lang1033 3. Limitations \line\b0 The asset will work well only on closed and not intersecting meshes.\f0\lang1045\par
+\f1\lang1033 Transparent, fading and cutout crossSection shaders do not display backfaces and support clipping only.\f0\lang1045\par
+\par
+\b\f1\lang1033 4. Basic cross section setups \b0\f0\lang1045\par
+\f1\lang1033 Just put the \i SectionSetup\i0 .\i cs\i0   component into the scene and set \i SectionSetup.model variable \i0 to the GameObjects which you want to section. Attach the \i GizmoFollow.cs \i0 script\i  \i0 to\i  \i0 the gizmo GameObject, whose position and orientation is supposed to determine the cross-section plane position and orientation.\f0\lang1045\par
+\par
+\f1\lang1033 In case of \i planar_xyz\i0  setup just put the \i Planar_xyzSection \i0 prefab into the scene.\f0\lang1045\par
+\f1\lang1033 Don't forget to place the EventSystem, because GUI inside the prefab will not work without it. Find the \i SectionSetup\i0 .\i cs\i0   \i Planar_xyzClippingSection.cs \i0 components on the prefab and  bind the \i SectionSetup.model \i0 variables\i  \i0 to the GameObject which you want to section.\f0\lang1045\par
+\f1\lang1033 Then you will be able to move the cross-section planes either with GUI slider or by dragging on the GameObject.. The slider range will adjust itself automatically to the GameObject's bounds. \f0\lang1045\par
+\f1\lang1033 Most of the scenarios, including the \i planar_xyz \i0 scene require calculating the bound box of the sectioned object.  In the \i planar_xyz \i0 scene the boundbox is needed for setting the range of the GUI sliders.\f0\lang1045\par
+\f1\lang1033 The bounds get calculated in edit mode within OnValidate function in editor. The zero point on the sliders corresponds to the position of \i ZeroAlignment\i0  transform object - if attached - or to the GameObject's bounds minimum.\f0\lang1045\par
+\f1\lang1033 There are two options available for bound box calculations.\f0\lang1045\par
+\f1\lang1033 The first one, when the \i accurateBounds \i0 toggle is deselected, is based on encapsulation of the renderer bounds of contained meshes. This results in bloating the size, especially when the child objects are rotated relative to their parents.\f0\lang1045\par
+\f1\lang1033 The second one, when the \i accurateBounds \i0 toggle is selected, is based on calculating the vertices from all the contained meshes. It uses multithreading and the special library, contained inside \i MathGeoLib.Exports.v0.1 \i0 folder.\i  \i0\f0\lang1045\par
+\par
+\b\f1\lang1033 5. Capped cross section setups\line\b0 Just put one of prefabs: CrossSectionBox prefab or CrossSectionCorner prefab into the\-             scene. In order to prevent undesired interaction between the gameObject and maxCamera orbit script when dragging the section planes - disable colliders on the GameObject or move it to the IgnoreRaycast layer or layer>13, Bind the model variables on two of the prefab's scripts to your GameObject. To get the best control over the object appearance use the crossSection shaders:\f0\lang1045\par
+\f1\lang1033 - Clipping/(Box or Corner)/SurfaceShader/Standard\line - Clipping/(Box or Corner)/Standard\line - Clipping/(Box or Corner)/Standard (Specular Setup)\f0\lang1045\par
+\par
+\b\f1\lang1033 6. Retrack backfaces\line\b0 If elements touch each other, i.e. front faces of preceding object are coplanar with back faces of the following object, z-fighting and flickering occurs.\f0\lang1045\par
+
+\pard\nowidctlpar\f1\lang1033 Here comes a new shader feature to move the backfaces slighty. It can be controlled on the material by the _retrackBackfaces boolean switch.  The extrusion amount can be controlled on the global shader value \cf4\i _BackfaceExtrusion\cf2\i0 .\cf0\f0\lang1045\par
+\par
+
+\pard\nowidctlpar\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\b\f1\lang1033 7. Edge (Outline) effect\b0\f0\lang1045\par
+\b\f1\lang1033 - Standard pipeline\line\cf2\b0 This feature shows edges on cross-section materials. There are separate settings for colors and visibility on object and section surfaces. It is integrated with Unity \cf4\i Post-processing stack (v2)\cf2\i0  from \cf4 Unity Essentials\cf0 . The feature assets are packed in \cf6\highlight7 EdgeEffect(Post Processing)\f0\lang1045 .unitypackage\highlight0  \cf0 file\f1\lang1033 . In order to activate download the \cf4\i Post-processing \cf0\i0 package using the Package manager and un\f0\lang1045 pack\f1\lang1033  the \f0\lang1045 unitypackage\f1\lang1033 . \f0\lang1045\par
+\f1\lang1033 Scene setup: \line Put the EdgeObject component on each of the objects, where you need the edges to be drawn, and also a single EdgeRenderer component in the scene.\f0\lang1045\par
+\f1\lang1033 The EdgeRenderer Object draws a custom \cf3\i\f3 _EdgeMap\lang1045  \cf2\i0 texture to mask the section and original areas of cross-section objects using command buffer. You will also need to setup a post processing profile, using CrossSecion/PerObjectEdgeEffect and attach all the Post Processing components to the camera. The edge effect also requires a special camera component CameraDepthNormalSetting to setup the special depth normal texture.\par
+\b - \f4\lang1033 URP (Lightweight) pipeline\cf0\b0\lang1045\par
+\cf2\f5\lang1033 In URP this feature is based on Renderer Features and doesn't require Unity \cf4\i Post-processing stack (v2\f4\lang1045 )\par
+\par
+\cf0\b\i0\f0 8\f1\lang1033 . \f0\lang1045 Scriptable Render Pipeline\f1\lang1033  Support\f0\lang1045  - location of sub-assets\b0\par
+\cf2 T\f1\lang1033 he \f0\lang1045 asset supports standard (built in) as well as scriptable render pipelines, universal (URP) and high definition (HDRP). The sub-assets for specific scriptable render pipelines are packed inside unitypackages.\par
+What sub-assets are needed depending on used render pipeline?\par
+When using URP or HDRP you will not need anything from the\par
+\cf6\highlight7 crossSection (Built In)\cf2\highlight0  folder. The \highlight7 crossSection (HDRP).unitypackage\highlight0  contains asset specific for HDRP and \highlight7 crossSection (URP).unitypackage\highlight0  contains asset specific for URP. The \line\highlight7 crossSection (URP&HDRP).unitypackage\highlight0  contains shadergraphs needed in both URP and HDRP materials and demo scenes.\cf4\f4\par
+\cf0\f0\par
+\b 9\f1\lang1033 . URP Support\b0\f0\lang1045\par
+\cf2\f1\lang1033 All the features are also working in Universal Render Pipeline (URP).\cf0\f0\lang1045\par
+\cf2\f1\lang1033 Most of the scenes, prefabs and materials are duplicated and have a version for URP.\line The asset contains a set of the main URP shaders with cross-section features added.\cf0\f0\lang1045\par
+\cf2\f1\lang1033 These are hlsl shaders:\cf0\f0\lang1045\par
+\cf2\f1\lang1033 - CrossSectionURP/BakedLit\line - CrossSectionURP/Lit\line - CrossSectionURP/SimpleLit\line - CrossSectionURP/Unlit\line and shader graphs:\line - Autodesk Interactive\line - Autodesk Interactive Masked\line - Autodesk Interactive Transparent\line and others.\line In case of baked lighting and shader graphs - there is no way to switch the lightmaps off for the backfaces in graphs, so they display in black and \cf4\i _SectionColor\cf5\i0   \cf2 has no effect.\line\line The Universal Render Pipeline does not support the multiple render passes in a single shader. An additional render pass, not visible, to write into the stencil buffers only is especially needed in the capped box scerario. In standard render pipeline it is included into the main shader, while in case of URP it constitutes a separate shader, that is \line - CrossSectionURP/CapPrepare\line To fix this the objects that require two passes can have two materials; one for each of the passes. \line But shader graph materials do not support stencil buffers at all and here is where the new scriptable render pipeline features like custom renderer and custom render pass come very useful. These new features make possible to define custom renderers and select them at the camera level. The custom renderers can contain custom render passes which enable rendering objects selected by layer masks in specific way or multiple times with multiple materials. The example of this is the \i single_plane_cap_urpGraph\i0  scene.\line\line The selective cross-section effect is added using Depth Texture  and \f3 ScriptableRendererFeature's.\par
+\par
+\cf0\b\f0 10. HDRP Support\b0\lang1045\par
+\cf2 Most of\f1\lang1033  the features are also working in \f0\lang1045 High Definition \f1\lang1033 Render Pipeline (\f0\lang1045 HD\f1\lang1033 RP).\f0\lang1045  In HDRP - only ShaderGraph shaders are supported.\line The asset contains a number of shadergraphs, that are working both for URP and HDRP. They are located in the crossSection (URP&HDRP) folder.\par
+The capped setups use stencil buffers. The cros-section needs to write to stencil buffers and they do that using Draw Renderers Custom Passes. The stencil write materials use the dedicated \cf8\i CrossSectionHDRP/Renderers/CapWrite\cf2\i0  shader. Cap materials use the decicated \cf8\i CrossSectionHDRP/Renderers/StencilShow\cf2\i0  shader, which is a modified version of the \cf8\i HDRP/Unlit\cf2\i0  shader, with stencils and triplanar mapping options added . Unfortunately HDRP pipeline uses stencil buffers extensively, leaving only two bit for custom uses.\par
+So I guess if I we tried to use more bits - in case of more cap materials - it might lead to some colisions with other HDRP shaders.\par
+\par
+\cf0\b\f1\lang1033 1\f0\lang1045 1\f1\lang1033 . \f0\lang1045 Switching between scenes with different pipelines\par
+\cf2\b0 If you have downloaded assets for scriptable pipelines URP or HDRP you might like to switch between scenes using different render pipelines. The demo scenes for UPR and HDRP contain \cf0 the \cf6\f4 AutoLoadPipelineAsset.cs \cf2 script, attached to camera, which does that automatically. When no scriptable pipelines are installed this script would cause errors, so I wrote a simple script adding menu item \cf3 "Edit/Render Pipeline/To Built in" \cf0 to switch to built in render pipeline in the scenes for built in render pipeline. You can use it to switch to the built in render pipeline quickly.\par
+\f0\par
+\par
+\b\f1\lang1033 1\f0\lang1045 2\f1\lang1033 . Package version changes\line\b0\f0\lang1045\par
+\ul\b\f1\lang1033 1.4.\ulnone\b0\f0\lang1045\par
+\f1\lang1033 A little reordering and the HorizontalClippingSection.cs script and demo scene added.\f0\lang1045\par
+\f1\lang1033 New Unity 4.6 GUI added\f0\lang1045\par
+\ul\b\f1\lang1033 1.5.\ulnone\b0\f0\lang1045\par
+\f1\lang1033 More shaders added, including new Unity Standard PBR shader. You can see all the shaders included in \ldblquote various_materials\rdblquote  scene. \f0\lang1045\par
+\f1\lang1033 Gizmo for clipping plane rotation added.\f0\lang1045\par
+\ul\b\f1\lang1033 1.6.\ulnone\b0\f0\lang1045\par
+\f1\lang1033 PBR shaders update for Unity 5.3.\f0\lang1045\par
+\ul\b\f1\lang1033 1.7.\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Most of assets got changed. \f0\lang1045\par
+\f1\lang1033 Shaders changed to multicompiled requiring global and material keywords and variables to manipulate.\f0\lang1045\par
+\f1\lang1033 New clipping features:\f0\lang1045\par
+\f1\lang1033 - added the second clipping plane, tilted at an angle to the first one, which can produce a pie section\f0\lang1045\par
+\f1\lang1033 - added sphere section\line\ul\b 1.8.\ulnone\b0\line Update for Unity 5.5.\f0\lang1045\par
+\f1\lang1033 Added Standard Surface Shader.  \f0\lang1045\par
+\ul\b\f1\lang1033 1.9.\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Update for Unity 5.6.\f0\lang1045\par
+\f1\lang1033 More examples added: cube section,\cf3  \cf0  tube section.\f0\lang1045\par
+\f1\lang1033 Capped setups, together with examples: box section and corner section - added\b .  \b0 Caps can hide clipped backfaces.\f0\lang1045\par
+\f1\lang1033 Retrack backfaces - new shader feature added.\f0\lang1045\par
+\ul\b\f1\lang1033 2.0\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Outline effect and support for intersecting geometry added.\f0\lang1045\par
+\f1\lang1033 Bounding box calculations were moved from Start function in playmode to OnValidate function in editor. Update for Unity 2017.3.0\f0\lang1045\par
+\ul\b\f1\lang1033 2.1\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Update for Unity 2017.4.1\f0\lang1045\par
+\ul\b\f1\lang1033 2.1.1\ulnone\b0\f0\lang1045\par
+\f3 Changes in capped setup section box and corner box clipping plane stencil shaders. Mapping of these shaders got moved from object uv to world space. \f0\par
+\f3 New example scenes:\f0\par
+\f3 - Box section textured\f0\par
+\f3 - Capped section textured\f0\par
+\f3 with clipping plane materials corresponding to gameObject materials (e.g. not hatched as in previous examples, but sharing with model gameObject the same diffuse textures).\f0\par
+\ul\b\f1\lang1033 2.2\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Update for Unity 2019.2.16\f0\lang1045\par
+\f1\lang1033 Added support for LWRP and LWRP shader graph.\f0\lang1045\par
+\ul\b\f1\lang1033 2.3\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Update for Unity 2019.3.0\f0\lang1045\par
+\f1\lang1033 LWRP replaced by URP\f0\lang1045\par
+\f1\lang1033 The outline feature was added to URP.\f0\lang1045\par
+\ul\b\f1\lang1033 2.4\ulnone\b0\f0\lang1045\par
+\f1\lang1033 BoundBox calculation improvements. Using multithreading and the \cf6\i\f3\lang1045 MathGeoLib\i0\f6\lang1033  \cf0\f0 library (in Editor).\lang1045\par
+\f1\lang1033 Added GUI/Text (Font) Shader.\f0\lang1045\par
+\f1\lang1033 Added  support for TextMeshPro shaders.\f0\lang1045\par
+\ul\b\f1\lang1033 2.5\ulnone\b0\f0\lang1045\par
+\f1\lang1033 Selective post process edge effect added in both standard and lightweight render \f4 pipelines. Separate color and visibility settings for object and section surfaces.\f0\lang1045\par
+\ul\b\f4\lang1033 2.6\ulnone\b0\f0\lang1045\par
+\f4\lang1033 Renaming standard pipeline shader filenames for better clarity.\lang1045\par
+\f5\lang1033 General improvements and fixes.\f4\lang1045\par
+\f5\lang1033 Update for Unity 2020.1.0\par
+\ul\b 2.7\ulnone\b0\f0\lang1045\par
+\f4\lang1033 Adding the \cf2\f0\lang1045 High Definition \f1\lang1033 Render Pipeline (\f0\lang1045 HD\f1\lang1033 RP)\f0\lang1045  support.\cf0\f4\par
+\f0\par
+\par
+\f1\lang1033 I would greatly appreciate any suggestions for improvement of the package.\line I would be willing to expand the list of supported shaders list due to demand from the users.\f0\lang1045\par
+
+\pard\nowidctlpar\qc\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\par
+
+\pard\nowidctlpar\b\f1\lang1033 WebPlayer demo:  {\b0{\field{\*\fldinst{HYPERLINK http://virtualplayground.d2.pl/crossSection/cs.html }}{\fldrslt{http://virtualplayground.d2.pl/crossSection/cs.html\ul0\cf0}}}}\b0\f0\fs24\lang1045  (for the old version of package)\par
+\b\f1\lang1033 WebGL demo\b0 : {{\field{\*\fldinst{HYPERLINK http://virtualplayground.d2.pl/crossSection/ }}{\fldrslt{http://virtualplayground.d2.pl/crossSection/\ul0\cf0}}}}\f0\fs24\lang1045\par
+\b\f1\lang1033 Android demo\b0 : {{\field{\*\fldinst{HYPERLINK http://virtualplayground.d2.pl/crossSection/cs.apk }}{\fldrslt{http://virtualplayground.d2.pl/crossSection/cs.apk\ul0\cf0}}}}\f0\fs24\lang1045\par
+\f1\lang1033 (Tested on Samsung Galaxy S8 and A7)\par
+\b Standalone HDRP demo\b0 : {{\field{\*\fldinst{HYPERLINK http://virtualplayground.d2.pl/crossSection/cs_hdrp_win.zip }}{\fldrslt{http://virtualplayground.d2.pl/crossSection/cs_hdrp_win.zip\ul0\cf0}}}}\f0\fs24\lang1045\par
+\par
+\b\f1\lang1033 Help and improvement suggestions\b0 :\f0\lang1045\par
+\par
+\f1\lang1033 forum thread:\f0\lang1045\par
+{\f1\lang1033{\field{\*\fldinst{HYPERLINK https://forum.unity3d.com/threads/released-crosssection-tool.223790/ }}{\fldrslt{https://forum.unity3d.com/threads/released-crosssection-tool.223790/\ul0\cf0}}}}\f0\fs24\par
+\f1\lang1033  \f0\lang1045\par
+\f1\lang1033 e-mail: {\f0\lang1045{\field{\*\fldinst{HYPERLINK "mailto:virtual@virtualplayground.d2.pl" }}{\fldrslt{\ul\cf9\cf9\ul\f1\lang1033 virtual@virtualplayground.d2.pl}}}}\f0\fs24\lang1045\par
+}
+ 
